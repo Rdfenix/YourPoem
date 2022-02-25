@@ -1,0 +1,16 @@
+section {
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.poems-button {
+    display: flex;
+    justify-content: center;
+}

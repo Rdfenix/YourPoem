@@ -1,0 +1,12 @@
+.default-button {
+    padding: 10px 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 2px 3px 8px -3px #000000;
+    border: none;
+    cursor: pointer;
+}
+
+.default-button:hover {
+    background: rgb(245, 245, 245);
+}

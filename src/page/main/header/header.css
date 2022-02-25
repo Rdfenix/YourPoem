@@ -1,0 +1,12 @@
+.header {
+    display: flex;
+    background-color: #000126;
+    width: 100%;
+    padding: 15px;
+    color: #FFF;
+}
+
+.header span {
+    font-size: 20px;
+    font-style: italic;
+}
