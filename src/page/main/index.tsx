@@ -1,21 +1,13 @@
 import "./index.css";
 import React from "react";
 import Header from "./header";
-import Button from "../../shared/component/button";
+import Body from "./body";
 
 const App = () => {
-  function getPoems() {
-    console.log("passei aqui ");
-  }
-
   return (
     <section>
       <Header />
-      <div className="container">
-        <div className="poems-button">
-          <Button handleButton={getPoems} nameOfButton="Click here" />
-        </div>
-      </div>
+      <Body />
     </section>
   );
 };
