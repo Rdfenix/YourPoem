@@ -27,6 +27,6 @@ function* fetchPoems() {
   }
 }
 
-const getRandomPoems = all([takeLatest(GET_POEMS, fetchPoems)]);
+const randomPoems = all([takeLatest(GET_POEMS, fetchPoems)]);
 
-export default getRandomPoems;
+export default randomPoems;

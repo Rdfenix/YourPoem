@@ -1,0 +1,64 @@
+.card-container {
+    width: 100%;
+    background-color: #fff;
+    padding: 20px 30px;
+    display: flex;
+    border-radius: 8px;
+    box-shadow: 6px 6px 6px -3px rgb(0 0 0 / 57%);
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-container:hover {
+    border: 1px solid #1c1cdb;
+}
+
+.card-header {
+    display: flex;
+    width: 100%;
+}
+
+.card-title,
+.card-author {
+    display: flex;
+}
+
+.card-title {
+    width: 220px;
+    display: flex;
+}
+
+.card-title>span {
+    font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card-author {
+    width: 220px;
+    padding-left: 25px;
+    display: flex;
+}
+
+.card-author>span {
+    font-style: italic;
+    color: #666666;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.card-body {
+    display: flex;
+    width: 100%;
+}
+
+.card-body>span {
+    font-size: 20px;
+    font-weight: 400;
+    color: #363636;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

@@ -9,3 +9,37 @@
     display: flex;
     justify-content: center;
 }
+
+.header-of-list {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 20px;
+}
+
+.sortable-items {
+    display: flex;
+}
+
+.title-area,
+.author-area {
+    padding: 5px 190px 5px 30px;
+    cursor: pointer;
+}
+
+.title-area:hover,
+.author-area:hover {
+    background-color: #d3d3d3;
+}
+
+.title-area {
+    border-right: 1px solid #d3d3d3;
+}
+
+.poems-area {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+    flex-direction: column;
+    gap: 15px;
+}
