@@ -2,6 +2,7 @@ import "./poem-list.css";
 import React, { useState, useEffect } from "react";
 import PoemCard from "../poem-card";
 import { Poem } from "../../../shared/interface/poem";
+import { sortAscending, sortDescendant } from "../../../shared/util/common";
 
 interface Props {
   poems: Poem[];
@@ -28,16 +29,7 @@ const PoemList = ({ poems }: Props) => {
       if (titleOrder === alphabeticOrder.aZ) {
         setTitleOrder(alphabeticOrder.zA);
 
-        arrayOfPoems.sort((a, b) => {
-          if (a.title < b.title) {
-            return 1;
-          }
-          if (a.title > b.title) {
-            return -1;
-          }
-
-          return 0;
-        });
+        arrayOfPoems.sort((a, b) => sortDescendant(a, b, "title"));
 
         return;
       }
@@ -45,16 +37,7 @@ const PoemList = ({ poems }: Props) => {
       if (titleOrder === alphabeticOrder.zA) {
         setTitleOrder(alphabeticOrder.aZ);
 
-        arrayOfPoems.sort((a, b) => {
-          if (a.title > b.title) {
-            return 1;
-          }
-          if (a.title < b.title) {
-            return -1;
-          }
-
-          return 0;
-        });
+        arrayOfPoems.sort((a, b) => sortAscending(a, b, "title"));
 
         return;
       }
@@ -68,16 +51,7 @@ const PoemList = ({ poems }: Props) => {
       if (authorOrder === alphabeticOrder.aZ) {
         setAuthorOrder(alphabeticOrder.zA);
 
-        arrayOfPoems.sort((a, b) => {
-          if (a.author < b.author) {
-            return 1;
-          }
-          if (a.author > b.author) {
-            return -1;
-          }
-
-          return 0;
-        });
+        arrayOfPoems.sort((a, b) => sortDescendant(a, b, "author"));
 
         return;
       }
@@ -85,16 +59,7 @@ const PoemList = ({ poems }: Props) => {
       if (authorOrder === alphabeticOrder.zA) {
         setAuthorOrder(alphabeticOrder.aZ);
 
-        arrayOfPoems.sort((a, b) => {
-          if (a.author > b.author) {
-            return 1;
-          }
-          if (a.author < b.author) {
-            return -1;
-          }
-
-          return 0;
-        });
+        arrayOfPoems.sort((a, b) => sortAscending(a, b, "author"));
 
         return;
       }

@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { Poem } from "../../shared/interface/poem";
+import { sortAscending } from "../../shared/util/common";
 import { fetchPoemsAction } from "../action/poemAction";
 import { GET_POEMS } from "../actionType";
 import { getPoems } from "../service/api";
@@ -20,6 +21,8 @@ function* fetchPoems() {
 
       return newPoem;
     });
+
+    newPoemList.sort((a, b) => sortAscending(a, b, "title"));
 
     yield put(fetchPoemsAction(newPoemList));
   } catch (error) {
