@@ -1,7 +1,9 @@
 import "./poem-card.css";
 import React from "react";
+import { useDispatch } from "react-redux";
 
 import starIcon from "./../../../shared/assets/icon/star.png";
+import { setFavoriteToCardAction } from "../../../core/action/poemAction";
 
 interface Props {
   title?: string;
@@ -11,12 +13,15 @@ interface Props {
 }
 
 const PoemCard = ({ author, title, poem, favorite }: Props) => {
+  const dispatch = useDispatch();
+
   function openCardDetail() {
     console.log("open detail");
   }
 
   function favoriteCard() {
-    console.log("favorite card");
+    const data: any = { title, author };
+    dispatch(setFavoriteToCardAction(data));
   }
 
   const cssClassFavorite = favorite

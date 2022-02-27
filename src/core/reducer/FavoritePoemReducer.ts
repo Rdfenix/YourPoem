@@ -1,22 +1,20 @@
 import { Poem } from "../../shared/interface/poem";
-import { FETCH_POEMS, UPDATE_POEMS } from "../actionType";
+import { GET_FAVORITE_POEMS } from "../actionType/index";
 
 const initialState: Poem[] = [];
 
-const PoemReducer = (
+const FavoritePoemReducer = (
   state = initialState,
   action: { payload: any; type: string }
 ) => {
   const { type, payload } = action;
 
   switch (type) {
-    case FETCH_POEMS:
-      return payload;
-    case UPDATE_POEMS:
+    case GET_FAVORITE_POEMS:
       return payload;
     default:
       return state;
   }
 };
 
-export default PoemReducer;
+export default FavoritePoemReducer;

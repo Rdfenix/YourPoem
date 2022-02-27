@@ -6,31 +6,35 @@ import { sortAscending, sortDescendant } from "../../../shared/util/common";
 
 interface Props {
   poems: Poem[];
+  favorites: Poem[];
 }
 
-const PoemList = ({ poems }: Props) => {
+const PoemList = ({ poems, favorites }: Props) => {
   const alphabeticOrder = {
     aZ: "a-z",
     zA: "z-a",
   };
 
   const [poemList, setPoemList] = useState(poems);
+  const [favoreitePoemList, setFavoreitePoemList] = useState(favorites);
   const [titleOrder, setTitleOrder] = useState(alphabeticOrder.aZ);
   const [authorOrder, setAuthorOrder] = useState(alphabeticOrder.aZ);
 
   useEffect(() => {
     setPoemList(poems);
-  }, [poems]);
+    setFavoreitePoemList(favorites);
+  }, [favorites, poems]);
 
   function sortTitle() {
-    if (poems.length) {
+    if (poems.length || favorites.length) {
       const arrayOfPoems = poems;
+      const arrayOfFavorites = favorites;
 
       if (titleOrder === alphabeticOrder.aZ) {
         setTitleOrder(alphabeticOrder.zA);
 
         arrayOfPoems.sort((a, b) => sortDescendant(a, b, "title"));
-
+        arrayOfFavorites.sort((a, b) => sortDescendant(a, b, "title"));
         return;
       }
 
@@ -38,20 +42,22 @@ const PoemList = ({ poems }: Props) => {
         setTitleOrder(alphabeticOrder.aZ);
 
         arrayOfPoems.sort((a, b) => sortAscending(a, b, "title"));
-
+        arrayOfFavorites.sort((a, b) => sortAscending(a, b, "title"));
         return;
       }
     }
   }
 
   function sortAuthor() {
-    if (poems.length) {
+    if (poems.length || favorites.length) {
       const arrayOfPoems = poems;
+      const arrayOfFavorites = favorites;
 
       if (authorOrder === alphabeticOrder.aZ) {
         setAuthorOrder(alphabeticOrder.zA);
 
         arrayOfPoems.sort((a, b) => sortDescendant(a, b, "author"));
+        arrayOfFavorites.sort((a, b) => sortDescendant(a, b, "author"));
 
         return;
       }
@@ -60,6 +66,7 @@ const PoemList = ({ poems }: Props) => {
         setAuthorOrder(alphabeticOrder.aZ);
 
         arrayOfPoems.sort((a, b) => sortAscending(a, b, "author"));
+        arrayOfFavorites.sort((a, b) => sortAscending(a, b, "author"));
 
         return;
       }
@@ -79,12 +86,23 @@ const PoemList = ({ poems }: Props) => {
         </div>
       </div>
       <section className="poems-area">
+        {favoreitePoemList.map((favorite) => (
+          <PoemCard
+            key={favorite.title}
+            author={favorite.author}
+            title={favorite.title}
+            poem={favorite.lines[0]}
+            favorite={favorite.favorite}
+          />
+        ))}
+        {favoreitePoemList.length > 0 && <hr />}
         {poemList.map((poem) => (
           <PoemCard
             key={poem.title}
             author={poem.author}
             title={poem.title}
             poem={poem.lines[0]}
+            favorite={poem.favorite}
           />
         ))}
       </section>
