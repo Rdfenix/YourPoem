@@ -103,6 +103,32 @@ const PoemList = ({ poems, favorites }: Props) => {
     setShowCardDetail(false);
   }
 
+  function poemsList(poemsData: Poem[]) {
+    return poemsData.map((poem) => (
+      <PoemCard
+        key={poem.title}
+        author={poem.author}
+        title={poem.title}
+        poem={poem.lines[0]}
+        favorite={poem.favorite}
+        handleCardDetail={openCardDetail}
+      />
+    ));
+  }
+
+  function favoristList(favoritePoemList: Poem[]) {
+    return favoritePoemList.map((favorite) => (
+      <PoemCard
+        key={favorite.title}
+        author={favorite.author}
+        title={favorite.title}
+        poem={favorite.lines[0]}
+        favorite={favorite.favorite}
+        handleCardDetail={openCardDetail}
+      />
+    ));
+  }
+
   return (
     <>
       <div className="header-of-list">
@@ -116,27 +142,9 @@ const PoemList = ({ poems, favorites }: Props) => {
         </div>
       </div>
       <section className="poems-area">
-        {favoreitePoemList.map((favorite) => (
-          <PoemCard
-            key={favorite.title}
-            author={favorite.author}
-            title={favorite.title}
-            poem={favorite.lines[0]}
-            favorite={favorite.favorite}
-            handleCardDetail={openCardDetail}
-          />
-        ))}
+        {favoristList(favoreitePoemList)}
         {favoreitePoemList.length > 0 && <hr />}
-        {poemList.map((poem) => (
-          <PoemCard
-            key={poem.title}
-            author={poem.author}
-            title={poem.title}
-            poem={poem.lines[0]}
-            favorite={poem.favorite}
-            handleCardDetail={openCardDetail}
-          />
-        ))}
+        {poemsList(poemList)}
       </section>
       {showCardDetail && (
         <CardDetail
