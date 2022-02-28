@@ -9,4 +9,5 @@ export interface Poem {
 export interface StateReducer {
   PoemReducer: Poem[];
   FavoritePoemReducer: Poem[];
+  LoadReducer: boolean;
 }

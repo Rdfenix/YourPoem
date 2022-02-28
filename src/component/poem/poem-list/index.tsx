@@ -4,19 +4,22 @@ import PoemCard from "../poem-card";
 import { Poem } from "../../../shared/interface/poem";
 import { sortAscending, sortDescendant } from "../../../shared/util/common";
 import CardDetail from "../poem-card-detail";
+import Loading from "../../../shared/component/loading";
 
 interface Props {
   poems: Poem[];
   favorites: Poem[];
+  loading: boolean;
 }
 
-const PoemList = ({ poems, favorites }: Props) => {
+const PoemList = ({ poems, favorites, loading }: Props) => {
   const alphabeticOrder = {
     aZ: "a-z",
     zA: "z-a",
   };
 
   const [poemList, setPoemList] = useState(poems);
+  const [load, setLoad] = useState(loading);
   const [favoreitePoemList, setFavoreitePoemList] = useState(favorites);
   const [titleOrder, setTitleOrder] = useState(alphabeticOrder.aZ);
   const [authorOrder, setAuthorOrder] = useState(alphabeticOrder.aZ);
@@ -31,7 +34,8 @@ const PoemList = ({ poems, favorites }: Props) => {
   useEffect(() => {
     setPoemList(poems);
     setFavoreitePoemList(favorites);
-  }, [favorites, poems]);
+    setLoad(loading);
+  }, [favorites, poems, loading]);
 
   function sortTitle() {
     if (poems.length || favorites.length) {
@@ -142,9 +146,14 @@ const PoemList = ({ poems, favorites }: Props) => {
         </div>
       </div>
       <section className="poems-area">
-        {favoristList(favoreitePoemList)}
-        {favoreitePoemList.length > 0 && <hr />}
-        {poemsList(poemList)}
+        {load && <Loading />}
+        {!load && (
+          <>
+            {favoristList(favoreitePoemList)}
+            {favoreitePoemList.length > 0 && <hr />}
+            {poemsList(poemList)}
+          </>
+        )}
       </section>
       {showCardDetail && (
         <CardDetail

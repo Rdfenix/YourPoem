@@ -5,6 +5,7 @@ import { sortAscending } from "../../shared/util/common";
 import {
   fetchPoemsAction,
   getFavoritePoemsAction,
+  setShowLoading,
   updatePoemListAction,
 } from "../action/poemAction";
 import { GET_POEMS, SET_FAVORITE } from "../actionType";
@@ -16,6 +17,8 @@ export const getFavoritesFromStore = (state: StateReducer) =>
 
 function* fetchPoems() {
   try {
+    yield put(setShowLoading(true));
+
     const response: AxiosResponse<Poem[]> = yield call(getPoems);
 
     const newPoemList: Poem[] = response?.data?.map((poem) => {
@@ -31,6 +34,9 @@ function* fetchPoems() {
     });
 
     newPoemList.sort((a, b) => sortAscending(a, b, "title"));
+    if (newPoemList.length) {
+      yield put(setShowLoading(false));
+    }
 
     yield put(fetchPoemsAction(newPoemList));
   } catch (error) {

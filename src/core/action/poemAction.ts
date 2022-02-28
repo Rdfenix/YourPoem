@@ -4,6 +4,7 @@ import {
   GET_FAVORITE_POEMS,
   GET_POEMS,
   SET_FAVORITE,
+  SHOW_LOADING,
   UPDATE_POEMS,
 } from "../actionType";
 
@@ -26,5 +27,10 @@ export const setFavoriteToCardAction = (payload: {
 });
 export const getFavoritePoemsAction = (payload: Poem[]) => ({
   type: GET_FAVORITE_POEMS,
+  payload,
+});
+
+export const setShowLoading = (payload: boolean) => ({
+  type: SHOW_LOADING,
   payload,
 });

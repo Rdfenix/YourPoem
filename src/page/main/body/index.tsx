@@ -11,6 +11,7 @@ const Body = () => {
   const favoritePoems = useSelector(
     (state: StateReducer) => state?.FavoritePoemReducer
   );
+  const load = useSelector((state: StateReducer) => state.LoadReducer);
 
   const dispatch = useDispatch();
 
@@ -24,7 +25,7 @@ const Body = () => {
         <header className="poems-button">
           <Button handleButton={getPoems} nameOfButton="Click here" />
         </header>
-        <PoemList poems={poems} favorites={favoritePoems} />
+        <PoemList poems={poems} favorites={favoritePoems} loading={load} />
       </div>
     </>
   );
