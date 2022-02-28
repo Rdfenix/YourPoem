@@ -6,17 +6,24 @@ import starIcon from "./../../../shared/assets/icon/star.png";
 import { setFavoriteToCardAction } from "../../../core/action/poemAction";
 
 interface Props {
-  title?: string;
-  author?: string;
-  poem?: string;
+  title: string;
+  author: string;
+  poem: string;
   favorite?: boolean;
+  handleCardDetail: Function;
 }
 
-const PoemCard = ({ author, title, poem, favorite }: Props) => {
+const PoemCard = ({
+  author,
+  title,
+  poem,
+  favorite,
+  handleCardDetail,
+}: Props) => {
   const dispatch = useDispatch();
 
   function openCardDetail() {
-    console.log("open detail");
+    handleCardDetail({ author, title });
   }
 
   function favoriteCard() {

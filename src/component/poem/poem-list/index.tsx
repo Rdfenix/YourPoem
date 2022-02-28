@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import PoemCard from "../poem-card";
 import { Poem } from "../../../shared/interface/poem";
 import { sortAscending, sortDescendant } from "../../../shared/util/common";
+import CardDetail from "../poem-card-detail";
 
 interface Props {
   poems: Poem[];
@@ -19,6 +20,13 @@ const PoemList = ({ poems, favorites }: Props) => {
   const [favoreitePoemList, setFavoreitePoemList] = useState(favorites);
   const [titleOrder, setTitleOrder] = useState(alphabeticOrder.aZ);
   const [authorOrder, setAuthorOrder] = useState(alphabeticOrder.aZ);
+
+  const [showCardDetail, setShowCardDetail] = useState(false);
+  const [poemData, setPoemData] = useState({
+    title: "",
+    author: "",
+    lines: [],
+  });
 
   useEffect(() => {
     setPoemList(poems);
@@ -73,6 +81,28 @@ const PoemList = ({ poems, favorites }: Props) => {
     }
   }
 
+  function openCardDetail(data: { title: string; author: string }) {
+    const result = poemList.find(
+      (item) => item.author === data.author && item.title === data.title
+    );
+    const favoriteResult = favoreitePoemList.find(
+      (item) => item.author === data.author && item.title === data.title
+    );
+    setShowCardDetail(true);
+
+    const newData: any = {
+      title: result ? result?.title : favoriteResult?.title,
+      author: result ? result?.author : favoriteResult?.author,
+      lines: result ? result?.lines : favoriteResult?.lines,
+    };
+
+    setPoemData(newData);
+  }
+
+  function closeCardDetail() {
+    setShowCardDetail(false);
+  }
+
   return (
     <>
       <div className="header-of-list">
@@ -93,6 +123,7 @@ const PoemList = ({ poems, favorites }: Props) => {
             title={favorite.title}
             poem={favorite.lines[0]}
             favorite={favorite.favorite}
+            handleCardDetail={openCardDetail}
           />
         ))}
         {favoreitePoemList.length > 0 && <hr />}
@@ -103,9 +134,19 @@ const PoemList = ({ poems, favorites }: Props) => {
             title={poem.title}
             poem={poem.lines[0]}
             favorite={poem.favorite}
+            handleCardDetail={openCardDetail}
           />
         ))}
       </section>
+      {showCardDetail && (
+        <CardDetail
+          author={poemData.author}
+          title={poemData.title}
+          lines={poemData.lines}
+          openCard={showCardDetail}
+          handleClose={closeCardDetail}
+        />
+      )}
     </>
   );
 };

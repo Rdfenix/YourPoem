@@ -5,7 +5,7 @@ import Body from "./body";
 
 const App = () => {
   return (
-    <section>
+    <section className="app-container">
       <Header />
       <Body />
     </section>
